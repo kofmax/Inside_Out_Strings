@@ -1,0 +1,60 @@
+<!-- You are given a string of words (x), for each word within the string you need to turn the word 'inside out'. By this I mean the internal letters will move out, and the external letters move toward the centre.
+If the word is even length, all letters will move. If the length is odd, you are expected to leave the 'middle' letter of the word where it is.
+An example should clarify:
+'taxi' would become 'atix' 'taxis' would become 'atxsi' -->
+
+<!--  "Inside Out Strings" Codewars.com 6kyu -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inside_Out_Strings</title>
+    <style>.result{font-size: 40px;}.text{font-size: 35px;color:#999;}</style>
+</head>
+
+<body>
+
+
+
+	<div class="text"></div>
+    <div class="result"></div>
+    <a href="https://www.codewars.com/kata/inside-out-strings/train/javascript">https://www.codewars.com/kata/inside-out-strings/train/javascript</a>
+
+<script>
+function insideOut(x) {
+
+    var arr = x.split(' '),
+        newArr = [];
+
+    for (var a = 0; a < arr.length; a++) {
+        if (arr[a].length > 3) {
+            var arrB = arr[a].split(''),
+                spliceArr1 = arrB.slice(0, arr[a].length / 2).reverse(),
+                spliceArr2 = arrB.slice(arr[a].length / 2, arr[a].length).reverse(),
+                def = '',
+                result;
+            if (arrB.length % 2) {
+                def = spliceArr2[spliceArr2.length - 1];
+                result = spliceArr1.join('') + def + spliceArr2.join('');
+                result = result.substring(0, result.length - 1);
+            } else {
+                result = spliceArr1.join('') + spliceArr2.join('');
+            }
+            newArr.push(result);
+        } else {
+            newArr.push(arr[a]);
+        }
+    }
+
+    return newArr.join(' ');
+
+}
+
+var text = 'taxi and taxis';
+document.querySelector('.text').innerHTML = text;
+document.querySelector('.result').innerHTML = insideOut(text);
+</script>
+</body>
+
+</html>
